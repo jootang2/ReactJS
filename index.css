@@ -1,7 +1,0 @@
-.title {
-    color: blue;
-}
-.title.clicked {
-    color: tomato;
-    font-size: 20px;
-}
