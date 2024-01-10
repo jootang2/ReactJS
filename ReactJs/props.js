@@ -1,13 +1,16 @@
 const root = document.querySelector("#root");
-const Btn = ({test}) => {
+const Btn = ({test, test2}) => {
   return (
-    <button>{test}</button>
+    <div>
+      <button>{test}</button>
+      <button>{test2}</button>
+    </div>
   )
 }
 const App = () => {
   return (
     <div>
-      <Btn test = 'This is Test'/>
+      <Btn test = 'This is Test' test2 = 'This is Test2'/>
     </div>
   );
 };
