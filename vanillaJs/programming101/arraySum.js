@@ -1,43 +1,43 @@
 //=======================================================================1회차
-if(1){
-    const _sum = (a, acc) => {
-        return a.length === 0 ? acc : _sum(a.slice(1), acc + a[0])
-    }
+// if(1){
+//     const _sum = (a, acc) => {
+//         return a.length === 0 ? acc : _sum(a.slice(1), acc + a[0])
+//     }
 
-    const sum = (a) => _sum(a, 0)
+//     const sum = (a) => _sum(a, 0)
 
-    const array = [15,2,3,1,6];
+//     const array = [15,2,3,1,6];
 
-    console.log("sum", sum(array));
-}
+//     console.log("sum", sum(array));
+// }
 
-if(1) {
-    const array = [15,2,3,1,6];
-    let acc = 0;
-    for(let i = 0; i <array.length; i ++){
-        acc += array[i]
-    }
-    console.log("acc", acc)
-}
+// if(1) {
+//     const array = [15,2,3,1,6];
+//     let acc = 0;
+//     for(let i = 0; i <array.length; i ++){
+//         acc += array[i]
+//     }
+//     console.log("acc", acc)
+// }
 
-if(1) {
-    const array = [15,2,3,1,6];
-    const _sum = (a, acc) => {
-        return a.length > 1 ? _sum(a.slice(1), acc + a[0]): acc + a[0]
-    }
-    const sum = (a) => _sum(a,0);
-    console.log("sum", sum(array))
-}
+// if(1) {
+//     const array = [15,2,3,1,6];
+//     const _sum = (a, acc) => {
+//         return a.length > 1 ? _sum(a.slice(1), acc + a[0]): acc + a[0]
+//     }
+//     const sum = (a) => _sum(a,0);
+//     console.log("sum", sum(array))
+// }
 
-if(1) {
-    const array = [15,2,3,1,6];
-    let acc = 0;
-    for(let i = array.length-1 ; i > 0; i --) {
-        acc += array[i];
-    }
-    acc += array[0];
-    console.log("acc", acc)
-}
+// if(1) {
+//     const array = [15,2,3,1,6];
+//     let acc = 0;
+//     for(let i = array.length-1 ; i > 0; i --) {
+//         acc += array[i];
+//     }
+//     acc += array[0];
+//     console.log("acc", acc)
+// }
 //============================================================================2회차
 /**
  * 오류와 실패
@@ -72,15 +72,45 @@ if(1) {
  * 
  */ 
 // 재귀 recursively
+// arrray[0] + sum(array, 1)
 if(1){
-    
-
+    const sum = (array, index = 0) => {
+        return index < array.length - 1 ?  array[index] + sum(array, index + 1) : array[index]
+    }
+    const array = [1,2,3,4,5];
+    console.log(sum(array));
 }
 // 꼬리 재귀 tail recursively
 if(1){
+    const err = msg=>{throw msg};
+    const _sum = (array, index, acc) => {
+        return index > 0 ?  _sum(array, index - 1, acc + array[index]) : (array[index]?? err("invalid element index0")) + acc
+    }
+    const sum = array => _sum(array, array.length - 1, 0);
+    const array = [1,2,3,4,5];
+    console.log(sum(array));
+
+
+    // console.log(sum([]));
+
+    // [] 빈 배열인 경우에는...?
+
+    try{
+        console.log(sum([]));
+    } catch {
+        0
+    }
 
 }
 // 꼬리 재귀 -> for문
 if(1){
-
+    const err = msg=>{throw msg};
+    const sum = (array) => {
+        let acc = 0;
+        for(let i = array.length - 1; i > 0; i --) acc += array[i];
+        acc += (array[0]?? err("invalid element index0"))
+        return acc
+    }
+    const array = [1,2,3,4,5];
+    console.log(sum(array));
 }
