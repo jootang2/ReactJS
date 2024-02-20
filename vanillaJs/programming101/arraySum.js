@@ -107,10 +107,58 @@ if(1){
     const err = msg=>{throw msg};
     const sum = (array) => {
         let acc = 0;
-        for(let i = array.length - 1; i > 0; i --) acc += array[i];
-        acc += (array[0]?? err("invalid element index0"))
+        for(let i = array.length - 1; i > -1; i = i - 1) acc = array[i] + acc;
+        // acc = (array[0]?? err("invalid element index0")) + acc
         return acc
     }
     const array = [1,2,3,4,5];
     console.log(sum(array));
+}
+// for문 : 내부 함수가 스코프덩어리로 되어있는 인자없는 함수를 루프 돌리는 것
+// 재귀 : 공유하고 있는 스코프 변수 없음 , 인자에만 의존함수를 루프 돌리는 것
+// for문 어려운 이유 : 공유 변수 상태가 라이프 사이클이 길어진다.
+if(1){
+    const err = msg=>{throw msg};
+    const sum = (array) => {
+        let acc = 0;
+        let i = array.length - 1
+
+        const f = () => acc = array[i] + acc;
+
+        for(; i > 0; i = i - 1) f(); 
+        acc += (array[0]?? err("invalid element index0"))
+        return acc
+    }
+    const array = [1,2,3,4,5];
+    console.log(sum, sum(array));
+}
+
+// ==========1차 과제============
+
+/**         수업 내용 정리
+ * 0. 변수란 코프와 라이프사이클을 갖는다, 메모리와 연산은 상호교환이 가능하며 특히 라이프사이클이 관여함
+ * 1. 오류와 실패의 관계 - 온류는 중간요소의 내결합성 때문에 실패로 이어지지 않을 수 있다 : 오류가 최대한 빨리 실패로 이어지게 짜라 => 컨텍스트에러가 더 무서움 =>
+ * 프로그램은 신뢰성과 안정성이 있음 - 안정성 (컨텍스트 에러발생이 올라감), 신뢰성을 높이자
+ * 2. 코드의 분리 또는 정리 - 이유 : 수정되는 원인에 따라 :: 변화율(변화율이 같은 애들끼리 코드를 모으자) 
+ * 변화율의 원인 : 수정되는 이유
+ * 3. 자바스크립트에서의 인터페이스 : 함수의 이름, 인자, 반환값의 형식이 일치하는 경우
+ * 4. 인터페이스를 일치시키면 컬렉션으로 묶을 수 있다. -> 일종의 일반화 -> 서로 다른 형태인 경우 인터페이스를 일치시켜 일반화를 한다.
+ * 5. 데이터와 데이터를 이용한 알고리즘이 이원화 되면 관리가 불가능 -> 데이터를 소유한 쪽에서 데이터를 사용하는 알고리즘을 제공한다. -> 이렇게 해야 사용자가 이상하게 쓰는 것을 방지 가능
+ * 6. 꼬리 최적화 함수를 루프로 고칠 때 기계적으로 고친다는 의미
+ * 7. 결국 루프는 클로저에만 의존하는 함수를 반복, 재귀함수는 인자에만 의존하는 함수를 반복
+ * 8. 반복되는 코드를 제거하기 위해 집착하자.
+ */
+
+// 2차 과제 : 1차원 배열의 stingify
+/**
+ * const a = [1, 3, "abc", true, ()=>3, null]
+ * JSON.stringify(a) === arrayStringify(a)
+ */
+
+if(1){
+    const a = [1, 3, "abc", true, _=>3, null]
+    
+    console.log(JSON.stringify(a))
+
+
 }
